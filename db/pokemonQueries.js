@@ -26,7 +26,6 @@ ORDER BY
     throw new Error("Could not retrieve pokemons");
   }
 }
-queriesPokemons();
 
 async function insertUsername(username) {
   await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);

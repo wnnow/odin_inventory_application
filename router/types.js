@@ -1,8 +1,7 @@
 const router = require("express").Router();
+const typeController = require("../controllers/typeController");
 
-router.get("/", (req, res) => {
-  res.render("types", { title: "Types" });
-});
+router.get("/", typeController.getPokemonTypes);
 
 router.get("/:id", (req, res) => {
   res.render("type", { title: "Type" });

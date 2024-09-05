@@ -4,8 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
+    <%- include('navbar') %>
+    <main class="main-content">
+      <h1><%= title %></h1>
+      <ul class="pokemon-list-container">
+        <% types.forEach(type => { %>
+        <li class="pokemon-type <%=type.name %>-type">
+          <a href="/types/<%=type.name%>"
+            ><div><%=capitalizeFirstChar(type.name) %></div></a
+          >
+        </li>
+        <% })%>
+      </ul>
+    </main>
+    <%- include('footer') %>
   </body>
 </html>
