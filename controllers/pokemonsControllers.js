@@ -1,17 +1,24 @@
-async function getPokemons() {
-  const url = "https://pokeapi.co/api/v2/pokemon/?limit=151";
-  try {
-    const response = await fetch(url);
-    if (!response) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+const db = require("../db/pokemonQueries");
 
-    const json = await response.json();
-    console.log(json);
-  } catch (err) {
-    console.error(err.message);
+async function getPokemons(req, res) {
+  try {
+    const pokemons = await db.queriesPokemons();
+    console.log(pokemons);
+    res.render("index", {
+      title: "Pokedex",
+      pokemons: pokemons,
+      capitalizeFirstChar: capitalizeFirstChar,
+    });
+  } catch (error) {
+    console.error("Error fetching pokemons:", error);
+    console.error(error);
+    res.status(500);
   }
 }
 
-getPokemons();
-const speciesURL = "https://pokeapi.co/api/v2/pokemon-species/?limit=151";
+function capitalizeFirstChar(str) {
+  return str[0].toUpperCase() + str.substr(1, str.length);
+}
+module.exports = {
+  getPokemons,
+};

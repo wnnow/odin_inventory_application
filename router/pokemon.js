@@ -1,15 +1,15 @@
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
-  res.render("trainers", { title: "Trainers" });
+  res.render("index", { title: "Pokédex" });
 });
 
 router.get("/:id", (req, res) => {
-  res.render("trainer", { title: "Trainer" });
+  res.render("pokemon", { title: "Pokemon" });
 });
 
 router.post("/", (req, res) => {
-  res.redirect("trainers");
+  res.redirect("index", { title: "Pokédex" });
 });
 
 module.exports = router;
