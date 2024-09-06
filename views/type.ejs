@@ -13,14 +13,12 @@
       <ul class="pokemon-list-container">
         <% pokemons.forEach(pokemon => { %>
         <li data-serial-id="<%=pokemon.serial_id%>">
-          <a href="/pokemon/<%=pokemon.serial_id%>">
-            <div>
-              <img src="<%=pokemon.img_url %>" alt="<%=pokemon.name%>" />
-            </div>
-            <div class="pokemon-name">
-              <%=capitalizeFirstChar(pokemon.name) %>
-            </div></a
-          >
+          <div>
+            <img src="<%=pokemon.img_url %>" alt="<%=pokemon.name%>" />
+          </div>
+          <div class="pokemon-name">
+            <%=capitalizeFirstChar(pokemon.name) %>
+          </div>
           <div class="type-container">
             <% pokemon.types.forEach(type => {%>
             <a href="/types/<%=type%>">

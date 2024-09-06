@@ -4,8 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
+    <%- include('navbar') %>
+    <main class="main-content">
+      <div class="content-header">
+        <h1><%= title %></h1>
+      </div>
+      <ul class="trainer-list-container">
+        <% trainers.forEach(trainer => { %>
+        <li data-serial-id="<%=trainer.id%>">
+          <a href="/trainers/<%= trainer.id %>">
+            <div class="trainer-img-container">
+              <img src="<%=trainer.img_url %>" alt="<%=trainer.name%>" />
+            </div>
+            <div class="pokemon-name">
+              <%=capitalizeFirstChar(trainer.name) %>
+            </div>
+          </a>
+        </li>
+        <% })%>
+      </ul>
+    </main>
+    <%- include('footer') %>
   </body>
 </html>

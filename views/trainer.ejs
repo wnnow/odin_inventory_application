@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <main class="main-content">
+      <div class="content-header">
+        <h1><%= title %></h1>
+      </div>
+      <% if(trainer.length === 0) {%>
+      <div class="content-header">
+        <h1><%= title %></h1>
+      </div>
+
+      <%} else { %>
+
+      <div data-serial-id="<%=trainer.trainer_id%>" class="trainer-container">
+        <div class="trainer-img-container">
+          <img
+            src="<%=trainer.trainer_img_url %>"
+            alt="<%=trainer.trainer_name%>"
+          />
+        </div>
+        <div class="pokemon-name">
+          <%=capitalizeFirstChar(trainer.trainer_name) %>
+        </div>
+      </div>
+      <ul class="pokemon-list-container">
+        <% trainer.pokemons.forEach(pokemon => { %>
+        <li data-serial-id="<%=pokemon.pokemon_serial_id%>">
+          <div>
+            <img
+              src="<%=pokemon.pokemon_img_url %>"
+              alt="<%=pokemon.pokemon_name%>"
+            />
+          </div>
+          <div class="pokemon-name">
+            <%=capitalizeFirstChar(pokemon.pokemon_name) %>
+          </div>
+          <div class="type-container">
+            <% pokemon.types.forEach(type => {%>
+            <a href="/types/<%=type%>">
+              <div class="pokemon-type <%=type %>-type">
+                <%=capitalizeFirstChar(type) %>
+              </div>
+            </a>
+            <%})%>
+          </div>
+        </li>
+        <% })%>
+      </ul>
+      <% }%>
+    </main>
+    <%- include('footer') %>
+  </body>
+</html>

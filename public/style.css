@@ -65,13 +65,21 @@ body {
   background-color: #e2e6ea;
 }
 
-.main-content {
+/* .main-content {
   max-width: 1280px;
   margin: 20px auto;
   padding: 20px;
   padding-top: 0;
   margin-top: 10px;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+.main-content {
+  width: 100%;
+  padding: 20px;
+  flex: 1;
 }
 
 ul {
@@ -104,11 +112,12 @@ ul {
   gap: 16px;
   padding: 2em;
   padding-top: 10px;
+  width: 100%;
 }
 
 /* Pokémon Card Styles */
 .pokemon-list-container li {
-  flex: 0 1 200px;
+  flex: 0 1 100%;
   max-width: 250px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -226,4 +235,56 @@ ul {
 }
 .water-type {
   background: #4592c4;
+}
+
+.trainer-list-container li {
+  display: inline-block;
+  width: 200px;
+}
+
+.trainer-container {
+  margin-bottom: 1em;
+}
+
+.trainer-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.trainer-img-container img {
+  height: 200px;
+}
+
+@media (min-width: 600px) {
+  .main-content {
+    max-width: 90%;
+    padding: 20px;
+    margin: 0 auto;
+  }
+  .pokemon-list-container li {
+    flex: 0 1 48%;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  .pokemon-list-container li {
+    flex: 0 1 30%;
+  }
+}
+
+/* PCs and Large Screens */
+@media (min-width: 1024px) {
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .pokemon-list-container li {
+    flex: 0 1 23%;
+  }
 }

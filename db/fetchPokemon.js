@@ -178,3 +178,27 @@ async function insertPokemon() {
 // );
 
 // DROP TABLE pokemon_info, type, pokemon_type, trainer_info, trainer_pokemon;
+
+// INSERT INTO trainer_info (name, date_of_birth, img_url, gender)
+// VALUES
+//   ('Ash Ketchum', '1990-05-22', 'https://static.wikia.nocookie.net/pokemon/images/7/76/Ash_anime_The_Beginning.png/revision/latest?cb=20110507193331', 'M'),
+//   ('Misty', '1992-07-01', 'https://static.wikia.nocookie.net/pokemon/images/5/56/Misty_anime_The_Beginning.png/revision/latest?cb=20231130185510', 'F'),
+//   ('Brock', '1988-11-15', 'https://static.wikia.nocookie.net/pokemon/images/c/c1/Brock_anime_The_Beginning.png/revision/latest?cb=20150915072500', 'M');
+
+//   INSERT INTO trainer_pokemon (trainer_id, pokemon_id)
+// VALUES
+//   (1, 25),
+//   (1, 6),
+//   (1, 1);
+
+//   INSERT INTO trainer_pokemon (trainer_id, pokemon_id)
+// VALUES
+//   (2, 121),
+//   (2, 54),
+//   (2, 130);
+
+//   INSERT INTO trainer_pokemon (trainer_id, pokemon_id)
+// VALUES
+//   (3, 95),
+//   (3, 74),
+//   (3, 37);

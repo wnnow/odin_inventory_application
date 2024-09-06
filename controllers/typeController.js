@@ -18,13 +18,22 @@ async function getPokemonInType(req, res) {
 
   try {
     const pokemons = await db.queryPokemonType(type);
-
-    res.render("type", {
-      title: `${capitalizeFirstChar(type)} Type Pokémon `,
-      pokemons: pokemons,
-      capitalizeFirstChar: capitalizeFirstChar,
-    });
-  } catch (error) {}
+    if (pokemons.length === 0) {
+      res.render("type", {
+        title: `Oops! The type you are looking for doesn't exist right now.`,
+        pokemons: pokemons,
+        capitalizeFirstChar: capitalizeFirstChar,
+      });
+    } else {
+      res.render("type", {
+        title: `${capitalizeFirstChar(type)} Type Pokémon `,
+        pokemons: pokemons,
+        capitalizeFirstChar: capitalizeFirstChar,
+      });
+    }
+  } catch (error) {
+    console.error("Error occur while render process: ", error);
+  }
 }
 
 module.exports = {
