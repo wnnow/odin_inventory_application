@@ -3,9 +3,7 @@ const typeController = require("../controllers/typeController");
 
 router.get("/", typeController.getPokemonTypes);
 
-router.get("/:id", (req, res) => {
-  res.render("type", { title: "Type" });
-});
+router.get("/:type", typeController.getPokemonInType);
 
 router.post("/", (req, res) => {
   res.redirect("types");

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <main class="main-content">
+      <h1><%= title %></h1>
+      <ul class="pokemon-list-container">
+        <% pokemons.forEach(pokemon => { %>
+        <li data-serial-id="<%=pokemon.serial_id%>">
+          <a href="/pokemon/<%=pokemon.serial_id%>">
+            <div>
+              <img src="<%=pokemon.img_url %>" alt="<%=pokemon.name%>" />
+            </div>
+            <div class="pokemon-name">
+              <%=capitalizeFirstChar(pokemon.name) %>
+            </div></a
+          >
+          <div class="type-container">
+            <% pokemon.types.forEach(type => {%>
+            <a href="/types/<%=type%>">
+              <div class="pokemon-type <%=type %>-type">
+                <%=capitalizeFirstChar(type) %>
+              </div>
+            </a>
+            <%})%>
+          </div>
+        </li>
+        <% })%>
+      </ul>
+    </main>
+    <%- include('footer') %>
+  </body>
+</html>

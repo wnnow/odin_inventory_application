@@ -72,11 +72,8 @@ async function fetchAndProcessPokemonData() {
   const extractPokemonData = await extractPokemonURL(
     "https://pokeapi.co/api/v2/pokemon/?limit=151"
   );
-  // const extractPokemonSpecies = await extractPokemonURL(
-  //   "https://pokeapi.co/api/v2/pokemon-species/?limit=15"
-  // );
+
   getPokemonTypeAndSprite(extractPokemonData);
-  // getPokemonFlavorTexts(extractPokemonSpecies);
 }
 
 async function main() {
@@ -86,7 +83,6 @@ async function main() {
 
 async function insertPokemon() {
   try {
-    // Insert types into the 'type' table
     await pool.query(`INSERT INTO type (name)
       VALUES
         ('normal'),
@@ -114,7 +110,6 @@ async function insertPokemon() {
 
   for (const pokemon of pokemons) {
     try {
-      // Insert Pokémon into the 'pokemon_info' table
       const res = await pool.query(
         "INSERT INTO pokemon_info (id, name, img_url, created_at) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING serial_id;",
         [pokemon.id, pokemon.name, pokemon.imgURL]
@@ -123,7 +118,6 @@ async function insertPokemon() {
       const pokemonId = res.rows[0].serial_id;
       console.log("pokemon_serial_id: ", pokemonId);
 
-      // Fetch type IDs from the 'type' table
       const typeResult = await pool.query(
         "SELECT serial_id FROM type WHERE name = ANY($1::text[]);",
         [pokemon.type]
@@ -131,7 +125,6 @@ async function insertPokemon() {
       const typeIds = typeResult.rows.map((row) => row.serial_id);
       console.log("Fetched type IDs:", typeIds);
 
-      // Insert type associations into the 'pokemon_type' table
       for (const typeId of typeIds) {
         await pool.query(
           "INSERT INTO pokemon_type (pokemon_id, type_id) VALUES ($1, $2) ON CONFLICT (pokemon_id, type_id) DO NOTHING;",

@@ -13,6 +13,21 @@ async function getPokemonTypes(req, res) {
   } catch (error) {}
 }
 
+async function getPokemonInType(req, res) {
+  const { type } = req.params;
+
+  try {
+    const pokemons = await db.queryPokemonType(type);
+
+    res.render("type", {
+      title: `${capitalizeFirstChar(type)} Type Pokémon `,
+      pokemons: pokemons,
+      capitalizeFirstChar: capitalizeFirstChar,
+    });
+  } catch (error) {}
+}
+
 module.exports = {
   getPokemonTypes,
+  getPokemonInType,
 };
