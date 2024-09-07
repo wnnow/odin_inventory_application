@@ -11,6 +11,7 @@
     <main class="main-content">
       <div class="content-header">
         <h1><%= title %></h1>
+        <button id="openModalBtn" type="button">Add Pokémon</button>
       </div>
       <% if(trainer.length === 0) {%>
       <div class="content-header">
@@ -30,6 +31,9 @@
           <%=capitalizeFirstChar(trainer.trainer_name) %>
         </div>
       </div>
+      <!--  -->
+      <% if (trainer.pokemons && trainer.pokemons.length > 0 &&
+      trainer.pokemons[0].pokemon_id) { %>
       <ul class="pokemon-list-container">
         <% trainer.pokemons.forEach(pokemon => { %>
         <li data-serial-id="<%=pokemon.pokemon_serial_id%>">
@@ -54,7 +58,10 @@
         </li>
         <% })%>
       </ul>
-      <% }%>
+      <% } else { %>
+      <!-- Message for trainers with no Pokémon -->
+      <p>This trainer has no Pokémon yet.</p>
+      <% } %> <% }%>
     </main>
     <%- include('footer') %>
   </body>

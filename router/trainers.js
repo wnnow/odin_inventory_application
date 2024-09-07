@@ -5,8 +5,6 @@ router.get("/", trainersController.getTrainersInfo);
 
 router.get("/:id", trainersController.getTrainerInfo);
 
-router.post("/", (req, res) => {
-  res.redirect("trainers");
-});
+router.post("/add", trainersController.addTrainer);
 
 module.exports = router;

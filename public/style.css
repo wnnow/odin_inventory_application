@@ -153,6 +153,7 @@ ul {
   font-size: 14px;
   text-align: center;
   width: 70px;
+  font-weight: bold;
 }
 .pokemon-type:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
@@ -287,4 +288,8 @@ ul {
   .pokemon-list-container li {
     flex: 0 1 23%;
   }
+}
+
+.content-header {
+  margin-bottom: 20px;
 }
