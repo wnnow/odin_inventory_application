@@ -19,6 +19,7 @@ async function queryTrainer(trainerId) {
         ti.id AS trainer_id,
         ti.name AS trainer_name,
         ti.img_url AS trainer_img_url,
+        ti.gender AS trainer_gender,
         pi.serial_id AS pokemon_id,
         pi.name AS pokemon_name,
         pi.img_url AS pokemon_img_url,
@@ -60,8 +61,24 @@ async function insertTrainer(trainerInfo) {
   }
 }
 
+async function updateTrainer(trainerInfo) {
+  try {
+    const { id, name, gender, img_url } = trainerInfo;
+
+    await pool.query(
+      `UPDATE trainer_info 
+      SET name = ($2), gender = ($3), img_url = ($4)
+      WHERE id = ($1)`,
+      [id, name, gender, img_url]
+    );
+  } catch (error) {
+    console.error("Error occur while query update Trainer info: ", error);
+  }
+}
+
 module.exports = {
   queryTrainer,
   queryTrainers,
   insertTrainer,
+  updateTrainer,
 };

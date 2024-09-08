@@ -238,9 +238,20 @@ ul {
   background: #4592c4;
 }
 
+.trainer-list-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .trainer-list-container li {
   display: inline-block;
   width: 200px;
+}
+
+.trainer-list-container li:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .trainer-container {

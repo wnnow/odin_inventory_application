@@ -4,14 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/addTrainerModal.css" />
+    <script src="/js/modal.js" defer></script>
   </head>
   <body>
     <%- include('navbar') %>
     <main class="main-content">
       <div class="content-header">
         <h1><%= title %></h1>
-        <button id="openModalBtn" type="button">Add Pokémon</button>
+        <a href="/trainers/<%=trainer.trainer_id%>/addPokemon"
+          ><button id="addPokemonBtn" type="button">Add Pokémon</button></a
+        >
+        <button id="openModalBtn" type="button">Edit Trainer info</button>
       </div>
       <% if(trainer.length === 0) {%>
       <div class="content-header">
@@ -58,10 +63,40 @@
         </li>
         <% })%>
       </ul>
+
       <% } else { %>
-      <!-- Message for trainers with no Pokémon -->
       <p>This trainer has no Pokémon yet.</p>
       <% } %> <% }%>
+
+      <div id="addTrainerModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <form action="/trainers/<%=trainer.trainer_id%>/update" method="POST">
+            <h2>Update Trainer</h2>
+            <div class="add-trainer-input-container">
+              <label for="name">Trainer Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value="<%=trainer.trainer_name%>"
+              />
+            </div>
+            <div>
+              <input type="radio" id="gender-male" name="gender" value="m" <%=
+              trainer.trainer_gender.toLowerCase() === 'm' ? 'checked' : '' %>
+              required />
+              <label for="gender-male">Male</label>
+              <input type="radio" id="gender-female" name="gender" value="f" <%=
+              trainer.trainer_gender.toLowerCase() === 'f' ? 'checked' : '' %>
+              required />
+              <label for="gender-female">Female</label>
+            </div>
+            <button class="submit-btn" type="submit">Update</button>
+          </form>
+        </div>
+      </div>
     </main>
     <%- include('footer') %>
   </body>

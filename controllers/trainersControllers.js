@@ -41,6 +41,7 @@ async function getTrainerInfo(req, res) {
             trainer_id: row.trainer_id,
             trainer_name: row.trainer_name,
             trainer_img_url: row.trainer_img_url,
+            trainer_gender: row.trainer_gender,
             pokemons: [],
           };
         }
@@ -54,6 +55,7 @@ async function getTrainerInfo(req, res) {
       });
 
       const result = Object.values(trainerMap);
+
       res.render("trainer", {
         title: "Trainer",
         trainer: result[0],
@@ -85,11 +87,35 @@ async function addTrainer(req, res) {
   }
 }
 
-// https://cdn.staticneo.com/w/pokemon/8/83/FireRed_LeafGreen_Red.png
-// https://archives.bulbagarden.net/media/upload/4/48/FireRed_LeafGreen_Leaf.png
+async function editTrainerInfo(req, res) {
+  try {
+    const { id } = req.params;
+    const { name, gender } = req.body;
+    let img_url = "";
+    if (gender === "m") {
+      img_url =
+        "https://cdn.staticneo.com/w/pokemon/8/83/FireRed_LeafGreen_Red.png";
+    }
+    if (gender === "f") {
+      img_url =
+        "https://archives.bulbagarden.net/media/upload/4/48/FireRed_LeafGreen_Leaf.png";
+    }
+
+    await db.updateTrainer({
+      id: id,
+      name: name,
+      gender: gender,
+      img_url: img_url,
+    });
+    res.redirect(`/trainers/${id}`);
+  } catch (error) {
+    console.error("Error occur while edit Trainer info controller: ", error);
+  }
+}
 
 module.exports = {
   getTrainersInfo,
   getTrainerInfo,
   addTrainer,
+  editTrainerInfo,
 };
