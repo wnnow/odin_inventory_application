@@ -1,0 +1,21 @@
+#addTrainerPokemon {
+  margin-bottom: 1em;
+}
+.pokemon_checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pokemon-list-container {
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.pokemon-list-container li {
+  position: relative;
+  max-width: 150px;
+}

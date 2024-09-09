@@ -9,4 +9,7 @@ router.post("/add", trainersController.addTrainer);
 
 router.post("/:id/update", trainersController.editTrainerInfo);
 
+router.get("/:id/addPokemon", trainersController.renderAddTrainerPokemonPage);
+router.post("/:id/addPokemon", trainersController.updateTrainerPokemon);
+
 module.exports = router;

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/addTrainerModal.css" />
+    <link rel="stylesheet" href="/css/addTrainerPokemon.css" />
+    <script src="/js/monitorTrainerPokemonCheckbox.js" defer></script>
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <main class="main-content">
+      <div class="content-header">
+        <h1><%= title %></h1>
+      </div>
+      <form
+        action="/trainers/<%= trainer.trainer_id %>/addPokemon"
+        method="POST"
+      >
+        <button id="addTrainerPokemon" type="submit">Finish Add Pokémon</button>
+        <ul class="pokemon-list-container">
+          <% pokemons.forEach(pokemon => { %>
+          <li data-serial-id="<%=pokemon.serial_id%>">
+            <div class="pokemon_checkbox">
+              <label for="<%= pokemon.serial_id %>">Select</label>
+              <input type="checkbox" class="pokemon-checkbox"
+              id="<%=pokemon.serial_id%>" name="pokemon_id" value="<%=
+              pokemon.serial_id %>" <%= trainer.pokemons.some(trainerPokemon =>
+              trainerPokemon.pokemon_id == pokemon.serial_id) ? 'checked' : ''
+              %> />
+            </div>
+            <div>
+              <img src="<%=pokemon.img_url %>" alt="<%=pokemon.name%>" />
+            </div>
+            <div class="pokemon-name">
+              <%=capitalizeFirstChar(pokemon.name) %>
+            </div>
+            <div class="type-container">
+              <% pokemon.types.forEach(type => {%>
+              <div class="pokemon-type <%=type %>-type">
+                <%=capitalizeFirstChar(type) %>
+              </div>
+              <%})%>
+            </div>
+          </li>
+          <% })%>
+        </ul>
+      </form>
+    </main>
+    <%- include('footer') %>
+  </body>
+</html>

@@ -46,6 +46,7 @@ async function queryTrainer(trainerId) {
     console.error("Error occur while fetching trainer: ", error);
   }
 }
+queryTrainer(1);
 
 async function insertTrainer(trainerInfo) {
   try {
@@ -76,9 +77,66 @@ async function updateTrainer(trainerInfo) {
   }
 }
 
+async function queriesTrainerPokemonsId(trainerId) {
+  try {
+    const { rows } = await pool.query(
+      `SELECT
+* FROM trainer_pokemon WHERE trainer_id = ($1)`,
+      [trainerId]
+    );
+
+    return rows;
+  } catch (error) {
+    console.error("Error occur while fetching trainer: ", error);
+  }
+}
+
+async function deleteTrainerPokemon(trainerId, pokemonId) {
+  try {
+    await pool.query(
+      `DELETE FROM trainer_pokemon WHERE trainer_id = ($1) AND pokemon_id = ($2)`,
+      [trainerId, pokemonId]
+    );
+  } catch (error) {
+    console.error(
+      "Error occur while delete trainer pokemon in trainer_pokemon: ",
+      error
+    );
+  }
+}
+async function deleteAllSelectedTrainerPokemon(trainerId, pokemonId) {
+  try {
+    await pool.query(`DELETE FROM trainer_pokemon WHERE trainer_id = ($1)`, [
+      trainerId,
+    ]);
+  } catch (error) {
+    console.error(
+      "Error occur while delete trainer pokemon in trainer_pokemon: ",
+      error
+    );
+  }
+}
+
+async function insertTrainerPokemon(trainerId, pokemonId) {
+  try {
+    await pool.query(
+      `INSERT INTO trainer_pokemon (trainer_id,pokemon_id) VALUES ($1,$2)`,
+      [trainerId, pokemonId]
+    );
+  } catch (error) {
+    console.error(
+      "Error occur while insert trainer pokemon in trainer_pokemon: ",
+      error
+    );
+  }
+}
 module.exports = {
   queryTrainer,
   queryTrainers,
   insertTrainer,
   updateTrainer,
+  queriesTrainerPokemonsId,
+  deleteTrainerPokemon,
+  deleteAllSelectedTrainerPokemon,
+  insertTrainerPokemon,
 };
