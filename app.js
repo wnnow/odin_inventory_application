@@ -18,9 +18,6 @@ app.use("/pokemons", pokemonRouter);
 app.use("/trainers", trainerRouter);
 app.use("/types", typeRouter);
 
-// app.get("/", (req, res) => {
-//   res.render("index", { title: "Pokédex" });
-// });
 app.get("/", pokemonsController.getPokemons);
 
 const PORT = process.env.PORT || 3000;

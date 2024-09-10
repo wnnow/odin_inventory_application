@@ -1,11 +1,13 @@
 const modal = document.getElementById("addTrainerModal");
-const openModalBtn = document.getElementById("openModalBtn");
+
 const closeModalBtn = document.querySelector(".close-btn");
 
-// Show the modal when the button is clicked
-openModalBtn.addEventListener("click", () => {
-  modal.style.display = "block";
-});
+const openEditTrainerInfoModalBtn = document.getElementById(
+  "openEditTrainerInfoModalBtn"
+);
+
+const trainersCount =
+  document.querySelector("body > main > ul").childElementCount;
 
 // Close the modal when the close button is clicked
 closeModalBtn.addEventListener("click", () => {
@@ -16,5 +18,14 @@ closeModalBtn.addEventListener("click", () => {
 window.addEventListener("click", (event) => {
   if (event.target == modal) {
     modal.style.display = "none";
+  }
+});
+
+openEditTrainerInfoModalBtn.addEventListener("click", () => {
+  const promptPassword = prompt("Password ?");
+  if (promptPassword === adminPassword) {
+    modal.style.display = "block";
+  } else {
+    alert("Password incorrect.");
   }
 });

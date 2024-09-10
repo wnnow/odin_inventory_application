@@ -4,19 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/addTrainerModal.css" />
-    <script src="/js/modal.js" defer></script>
+    <script defer>
+      const adminPassword = "<%=adminPassword %>";
+    </script>
+    <script src="/js/editTrainerModal.js" defer></script>
   </head>
   <body>
     <%- include('navbar') %>
     <main class="main-content">
       <div class="content-header">
         <h1><%= title %></h1>
+
         <a href="/trainers/<%=trainer.trainer_id%>/addPokemon"
           ><button id="addPokemonBtn" type="button">Add Pokémon</button></a
         >
-        <button id="openModalBtn" type="button">Edit Trainer info</button>
+        <button id="openEditTrainerInfoModalBtn" type="button">
+          Edit Trainer info
+        </button>
       </div>
       <% if(trainer.length === 0) {%>
       <div class="content-header">
@@ -32,7 +39,7 @@
             alt="<%=trainer.trainer_name%>"
           />
         </div>
-        <div class="pokemon-name">
+        <div class="trainer-name">
           <%=capitalizeFirstChar(trainer.trainer_name) %>
         </div>
       </div>

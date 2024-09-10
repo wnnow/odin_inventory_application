@@ -5,7 +5,11 @@ router.get("/", trainersController.getTrainersInfo);
 
 router.get("/:id", trainersController.getTrainerInfo);
 
-router.post("/add", trainersController.addTrainer);
+router.post(
+  "/add",
+  trainersController.validateTrainer,
+  trainersController.addTrainer
+);
 
 router.post("/:id/update", trainersController.editTrainerInfo);
 

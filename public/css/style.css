@@ -304,3 +304,9 @@ ul {
 .content-header {
   margin-bottom: 20px;
 }
+
+.trainer-name {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.25em;
+}

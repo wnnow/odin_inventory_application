@@ -4,17 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/addTrainerModal.css" />
-    <script src="/js/modal.js" defer></script>
+    <script src="/js/addTrainerModal.js" defer></script>
   </head>
   <body>
     <%- include('navbar') %>
     <main class="main-content">
       <div class="content-header">
         <h1><%= title %></h1>
-        <button id="openModalBtn" type="button">Add Trainer</button>
+        <button id="openAddModalBtn" type="button">Add Trainer</button>
       </div>
+      <% if (locals.errors && locals.errors.length > 0) { %>
+      <ul>
+        <% locals.errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
       <ul class="trainer-list-container">
         <% trainers.forEach(trainer => { %>
         <li data-serial-id="<%=trainer.id%>">
@@ -22,7 +30,7 @@
             <div class="trainer-img-container">
               <img src="<%=trainer.img_url %>" alt="<%=trainer.name%>" />
             </div>
-            <div class="pokemon-name">
+            <div class="trainer-name">
               <%=capitalizeFirstChar(trainer.name) %>
             </div>
           </a>
@@ -37,7 +45,14 @@
             <h2>Add New Trainer</h2>
             <div class="add-trainer-input-container">
               <label for="name">Trainer Name:</label>
-              <input type="text" id="name" name="name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                minlength="1"
+                maxlength="30"
+                required
+              />
             </div>
             <div>
               <input

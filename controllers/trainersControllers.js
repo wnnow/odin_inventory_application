@@ -1,7 +1,19 @@
 const db = require("../db/trainerQueries");
+require("dotenv").config();
 const queriesPokemons = require("../db/pokemonQueries").queriesPokemons;
 const capitalizeFirstChar =
   require("./pokemonsControllers").capitalizeFirstChar;
+
+const { body, validationResult } = require("express-validator");
+const validateTrainer = [
+  body("name")
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .withMessage("Trainer name must be between 1 and 30 characters long"),
+  body("gender")
+    .isIn(["m", "f"])
+    .withMessage("Gender must be either male (m) or female (f)"),
+];
 
 async function getTrainersInfo(req, res) {
   try {
@@ -35,33 +47,13 @@ async function getTrainerInfo(req, res) {
         capitalizeFirstChar: capitalizeFirstChar,
       });
     } else {
-      // const trainerMap = {};
-      // trainer.forEach((row) => {
-      //   if (!trainerMap[row.trainer_id]) {
-      //     trainerMap[row.trainer_id] = {
-      //       trainer_id: row.trainer_id,
-      //       trainer_name: row.trainer_name,
-      //       trainer_img_url: row.trainer_img_url,
-      //       trainer_gender: row.trainer_gender,
-      //       pokemons: [],
-      //     };
-      //   }
-
-      //   trainerMap[row.trainer_id].pokemons.push({
-      //     pokemon_id: row.pokemon_id,
-      //     pokemon_name: row.pokemon_name,
-      //     pokemon_img_url: row.pokemon_img_url,
-      //     types: row.types,
-      //   });
-      // });
-
-      // const result = Object.values(trainerMap);
       const result = organizeTrainerData(trainer);
 
       res.render("trainer", {
         title: "Trainer",
         trainer: result[0],
         capitalizeFirstChar: capitalizeFirstChar,
+        adminPassword: process.env.adminPassword,
       });
     }
   } catch (error) {
@@ -70,6 +62,16 @@ async function getTrainerInfo(req, res) {
 }
 
 async function addTrainer(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).render("trainers", {
+      errors: errors.array(),
+      title: "Add New Trainer",
+      capitalizeFirstChar,
+    });
+  }
+
   try {
     const { name, gender } = req.body;
     let img_url = "";
@@ -192,4 +194,5 @@ module.exports = {
   editTrainerInfo,
   renderAddTrainerPokemonPage,
   updateTrainerPokemon,
+  validateTrainer,
 };

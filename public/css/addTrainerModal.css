@@ -1,12 +1,12 @@
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
-  z-index: 100; /* Ensure it's above other content */
+  z-index: 100;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -16,10 +16,9 @@
   padding-right: 10px;
   position: relative;
   background-color: white;
-  margin: 15% auto; /* Center the modal */
-
+  margin: 15% auto;
   border-radius: 8px;
-  width: 300px; /* Width of the modal */
+  width: 300px;
   text-align: center;
 }
 
@@ -67,4 +66,49 @@ button:hover {
 
 .submit-btn {
   margin-top: 16px;
+}
+
+.pokemon-list-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  gap: 16px; /* Space between grid items */
+  padding: 2em;
+  padding-top: 10px;
+  width: 100%;
+  justify-items: center;
+}
+
+@media (max-width: 1024px) {
+  .pokemon-list-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .pokemon-list-container {
+    grid-template-columns: 1fr; /* 1 column for mobile screens */
+  }
+}
+
+.pokemon-list-container li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  min-width: 250px;
+  height: auto;
+}
+
+.pokemon-name {
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
+}
+
+.pokemon-list-container > li > div > img {
+  height: 150px;
 }
