@@ -28,7 +28,19 @@
         <li data-serial-id="<%=trainer.id%>">
           <a href="/trainers/<%= trainer.id %>">
             <div class="trainer-img-container">
-              <img src="<%=trainer.img_url %>" alt="<%=trainer.name%>" />
+              <% if(trainer.gender === 'm') { %>
+
+              <img
+                src="/images/FireRed_LeafGreen_Red.jpg"
+                alt="<%=trainer.name%>"
+              />
+              <%}%> <% if(trainer.gender === 'f') { %>
+
+              <img
+                src="/images/FireRed_LeafGreen_Leaf.jpg"
+                alt="<%=trainer.name%>"
+              />
+              <%}%>
             </div>
             <div class="trainer-name">
               <%=capitalizeFirstChar(trainer.name) %>

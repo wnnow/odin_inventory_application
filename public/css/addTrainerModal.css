@@ -68,7 +68,7 @@ button:hover {
   margin-top: 16px;
 }
 
-.pokemon-list-container {
+.trainer-pokemon-list-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
   gap: 16px; /* Space between grid items */
@@ -90,7 +90,7 @@ button:hover {
   }
 }
 
-.pokemon-list-container li {
+.trainer-pokemon-list-container li {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,11 +104,11 @@ button:hover {
   height: auto;
 }
 
-.pokemon-name {
+.trainer-pokemon-name {
   margin-top: -0.5em;
   margin-bottom: 0.5em;
 }
 
-.pokemon-list-container > li > div > img {
+.trainer-pokemon-list-container > li > div > img {
   height: 150px;
 }
